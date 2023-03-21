@@ -16,6 +16,5 @@ namespace WacthMovie.DataAccess.Repository.IRepository
         void Update(Category obj);
 
         //save must be done in Repository ma but this is not the good practice 
-        void Save();
     }
 }
