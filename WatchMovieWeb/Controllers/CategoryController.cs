@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WatchMovieWeb.Data;
-using WatchMovieWeb.Models;
+using WatchMovie.Models;
+using WatchMovieWeb.DataAccess;
+
 
 namespace WatchMovieWeb.Controllers
 {

@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchMovieWeb", "WatchMovieWeb\WatchMovieWeb.csproj", "{00FECA17-21BB-4ACA-BA6D-823254F40459}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchMovieWeb", "WatchMovieWeb\WatchMovieWeb.csproj", "{00FECA17-21BB-4ACA-BA6D-823254F40459}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WacthMovie.DataAccess", "WatchMovirDataAccess\WacthMovie.DataAccess.csproj", "{C813963C-A8D3-4733-8518-31E21922ECFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchMovie.Models", "WatchMovie.Models\WatchMovie.Models.csproj", "{EAED6971-56BD-4211-AF3F-911098E70CFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchMovie.Utility", "WatchMovie.Utility\WatchMovie.Utility.csproj", "{E249FD0F-1D57-4EAF-BC2C-F8455A4E6994}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{00FECA17-21BB-4ACA-BA6D-823254F40459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00FECA17-21BB-4ACA-BA6D-823254F40459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00FECA17-21BB-4ACA-BA6D-823254F40459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C813963C-A8D3-4733-8518-31E21922ECFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C813963C-A8D3-4733-8518-31E21922ECFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C813963C-A8D3-4733-8518-31E21922ECFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C813963C-A8D3-4733-8518-31E21922ECFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAED6971-56BD-4211-AF3F-911098E70CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAED6971-56BD-4211-AF3F-911098E70CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAED6971-56BD-4211-AF3F-911098E70CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAED6971-56BD-4211-AF3F-911098E70CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E249FD0F-1D57-4EAF-BC2C-F8455A4E6994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E249FD0F-1D57-4EAF-BC2C-F8455A4E6994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E249FD0F-1D57-4EAF-BC2C-F8455A4E6994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E249FD0F-1D57-4EAF-BC2C-F8455A4E6994}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

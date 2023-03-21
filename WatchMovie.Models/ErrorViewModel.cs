@@ -1,4 +1,4 @@
-namespace WatchMovieWeb.Models
+namespace WatchMovie.Models
 {
     public class ErrorViewModel
     {

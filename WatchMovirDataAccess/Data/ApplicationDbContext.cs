@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WatchMovieWeb.Models;
+using WatchMovie.Models;
 
-namespace WatchMovieWeb.Data
+
+namespace WatchMovieWeb.DataAccess
 {
     public class ApplicationDbContext :DbContext
     {
