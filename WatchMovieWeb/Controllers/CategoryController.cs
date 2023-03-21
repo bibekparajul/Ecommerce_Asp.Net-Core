@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WacthMovie.DataAccess.Repository.IRepository;
 using WatchMovie.Models;
 using WatchMovieWeb.DataAccess;
 
@@ -7,9 +8,9 @@ namespace WatchMovieWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ICategoryRepository _db; //
 
-        public CategoryController(ApplicationDbContext db)
+        public CategoryController(ICategoryRepository db)    //
         {
             _db = db;   
         }
@@ -17,7 +18,7 @@ namespace WatchMovieWeb.Controllers
         //configured in Index.cshtml of category
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList = _db.Categories;
+            IEnumerable<Category> objCategoryList = _db.GetAll(); //   
             return View(objCategoryList);
         }
         //GET
@@ -42,8 +43,8 @@ namespace WatchMovieWeb.Controllers
             if (ModelState.IsValid)
             {
 
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                _db.Add(obj);    //
+                _db.Save();      //
                 TempData["success"] = "Category Created Successfully";
                 return RedirectToAction("Index");
             }
@@ -60,7 +61,7 @@ namespace WatchMovieWeb.Controllers
             //var categoryFromDb = _db.Categories.Find(id);
 
             //find incase of priimary key only if not below sabai bujhxa!!!
-            var categoryFromDbFirst = _db.Categories.FirstOrDefault(u => u.Name == "id");   
+            var categoryFromDbFirst = _db.GetFirstorDefault(u => u.Id == id);    //
             //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id);
             if(categoryFromDbFirst == null)
             {
@@ -84,8 +85,8 @@ namespace WatchMovieWeb.Controllers
             if (ModelState.IsValid)
             {
 
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _db.Update(obj);   //
+                _db.Save();        //    
                 TempData["success"] = "Category Updated Successfully";
 
                 return RedirectToAction("Index");
@@ -100,14 +101,14 @@ namespace WatchMovieWeb.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _db.Categories.Find(id);
-            //var categoryFromDbFirst = _db.Categories.FirstOrDefault(u => u.Id == id);   
+            //var categoryFromDb = _db.Categories.Find(id);
+            var categoryFromDbFirst = _db.GetFirstorDefault(u => u.Id == id);   
             //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id);
-            if(categoryFromDb == null)
+            if(categoryFromDbFirst == null)
             {
                 return NotFound();
             }
-            return View(categoryFromDb);
+            return View(categoryFromDbFirst);
         }
 
         //POST
@@ -116,14 +117,14 @@ namespace WatchMovieWeb.Controllers
         public IActionResult DeletePOSt(int ?id)
         {
 
-            var obj = _db.Categories.Find(id);  
+            var obj = _db.GetFirstorDefault(u => u.Id == id);  
             if(obj == null)
             {
                 return NotFound();
             }
 
-                _db.Categories.Remove(obj);
-                _db.SaveChanges();
+                _db.Remove(obj);
+                _db.Save();
             TempData["success"] = "Category Deleted Successfully";
 
             return RedirectToAction("Index");

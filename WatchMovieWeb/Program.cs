@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using WacthMovie.DataAccess.Repository;
+using WacthMovie.DataAccess.Repository.IRepository;
 using WatchMovieWeb.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
+//lifetime to replace DbContext with Category Repo
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+ 
+
 //this below code is used when we add the new razor runtime compilation package..which
 //in this case is the  new nav bar from the solar themeee and nav inside the _layout.cshtml
 builder.Services.AddRazorPages();
