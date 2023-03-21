@@ -123,8 +123,8 @@ namespace WatchMovieWeb.Controllers
                 return NotFound();
             }
 
-                _db.Remove(obj);
-                _db.Save();
+                _db.Remove(obj);    //
+                _db.Save();         //
             TempData["success"] = "Category Deleted Successfully";
 
             return RedirectToAction("Index");

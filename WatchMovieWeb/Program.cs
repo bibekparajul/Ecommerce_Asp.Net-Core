@@ -15,7 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     ));
 
 //lifetime to replace DbContext with Category Repo
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();  //
  
 
 //this below code is used when we add the new razor runtime compilation package..which
