@@ -19,6 +19,7 @@ namespace WacthMovie.DataAccess.Repository.IRepository
         //update ko lagi generic repo ma narakhney
 
         //for Delete
+        void Remove(T entity);  
         void RemoveRange(IEnumerable<T> entity);  
     }
 }

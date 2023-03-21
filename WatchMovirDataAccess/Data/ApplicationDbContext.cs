@@ -11,6 +11,7 @@ namespace WatchMovieWeb.DataAccess
 
         }
 
+        //ultimate level ma DbSet ma kaam garney ho
         public DbSet<Category> Categories { get; set; }  
     }
 }
