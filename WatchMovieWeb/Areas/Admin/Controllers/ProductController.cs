@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WacthMovie.DataAccess.Repository.IRepository;
 using WatchMovie.Models;
+using WatchMovie.Models.ViewModels;
 using WatchMovieWeb.DataAccess;
 
 
@@ -28,30 +29,31 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
         //GET(for Edit) (Validation remains same)
         public IActionResult Upsert(int? id)
         {
-            //below ienu are used for accesing the dropdown form product form
+            //ViewBag ra viewdata ko satta
 
-            Product product = new Product();
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(
-                u => new SelectListItem
+            ProductVM productVM = new()
+            {
+                Product = new(),
+                CategoryList = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
                 {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                });
+                    Text = i.Name,
+                    Value = i.Id.ToString()
 
-            IEnumerable<SelectListItem> CoverTypeList = _unitOfWork.CoverType.GetAll().Select(
-            u => new SelectListItem
-             {
-            Text = u.Name,
-            Value = u.Id.ToString()
-             });
+                }),
+                CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+
+                })
+            };
+
             if (id == null || id == 0)
 
             {
-                //create product
-                ViewBag.CategoryList = CategoryList; //viewbag in action
-                ViewData["CoverTypeList"] = CoverTypeList;
 
-                return View(product);
+
+                return View(productVM);
             }
             else
             {
@@ -59,7 +61,7 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
             }
 
 
-            return View(product);
+            return View(productVM);
         }
 
         //POST
