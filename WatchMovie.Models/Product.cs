@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WatchMovie.Models
-{
+{   
     public class Product
     {
 
@@ -51,7 +51,7 @@ namespace WatchMovie.Models
         [Required]
         public int CoverTypeId { get; set; }
 
-        public Category CoverType { get; set; }
+        public CoverType CoverType { get; set; }
 
     }
 }
