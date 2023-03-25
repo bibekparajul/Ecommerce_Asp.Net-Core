@@ -22,53 +22,31 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
             return View(objCoverTypeList);
         }
         //GET
-        public IActionResult Create()
-        {
 
-            return View();
-        }
-
-        //POST
-        [HttpPost]                 //used to handle the http request
-        [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
-        public IActionResult Create(CoverType obj)
-        {
-
-
-            //server side validation because name cannot be empty
-            if (ModelState.IsValid)
-            {
-
-                _unitOfWork.CoverType.Add(obj);    //
-                _unitOfWork.Save();      //
-                TempData["success"] = "Covertype Created Successfully";
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
 
         //GET(for Edit) (Validation remains same)
-        public IActionResult Edit(int? id)
+        public IActionResult Upsert(int? id)
         {
+            Product product = new Product();
             if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-  
 
-            //find incase of priimary key only if not below sabai bujhxa!!!
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstorDefault(u => u.Id == id);    //
-            if (CoverTypeFromDbFirst == null)
             {
-                return NotFound();
+                //create product
+                return View(product);
             }
-            return View(CoverTypeFromDbFirst);
+            else
+            {
+                //update product
+            }
+
+
+            return View(product);
         }
 
         //POST
         [HttpPost]                 //used to handle the http request
         [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
-        public IActionResult Edit(CoverType obj)
+        public IActionResult Upsert(CoverType obj)
         {
 
             //server side validation because name cannot be empty
