@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WacthMovie.DataAccess.Repository.IRepository;
 using WatchMovie.Models;
 using WatchMovieWeb.DataAccess;
@@ -27,7 +28,22 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
         //GET(for Edit) (Validation remains same)
         public IActionResult Upsert(int? id)
         {
+            //below ienu are used for accesing the dropdown form product form
+
             Product product = new Product();
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(
+                u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
+
+            IEnumerable<SelectListItem> CoverTypeList = _unitOfWork.CoverType.GetAll().Select(
+            u => new SelectListItem
+             {
+            Text = u.Name,
+            Value = u.Id.ToString()
+             });
             if (id == null || id == 0)
 
             {
