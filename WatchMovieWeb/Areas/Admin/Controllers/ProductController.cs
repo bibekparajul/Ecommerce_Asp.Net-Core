@@ -48,6 +48,7 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
 
             {
                 //create product
+                ViewBag.CategoryList = CategoryList; //viewbag in action
                 return View(product);
             }
             else
