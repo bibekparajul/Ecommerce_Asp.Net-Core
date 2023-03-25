@@ -67,14 +67,14 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
         //POST
         [HttpPost]                 //used to handle the http request
         [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
-        public IActionResult Upsert(CoverType obj)
+        public IActionResult Upsert(ProductVM obj, IFormFile file)
         {
 
             //server side validation because name cannot be empty
             if (ModelState.IsValid)
             {
 
-                _unitOfWork.CoverType.Update(obj);   //
+                //_unitOfWork.CoverType.Update(obj);   //
                 _unitOfWork.Save();        //    
                 TempData["success"] = "Covertype Updated Successfully";
 
