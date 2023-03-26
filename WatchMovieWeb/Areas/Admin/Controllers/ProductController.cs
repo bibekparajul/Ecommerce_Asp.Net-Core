@@ -13,9 +13,16 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork; //
 
-        public ProductController(IUnitOfWork unitOfWork)    //
+        //to access wwwroot we need webhost env
+        //for create firstmodel git
+
+        private readonly IWebHostEnvironment _hostEnvironment;
+
+
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)    //
         {
             _unitOfWork = unitOfWork;
+            _hostEnvironment = hostEnvironment; 
         }
 
         public IActionResult Index()
@@ -67,16 +74,31 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
         //POST
         [HttpPost]                 //used to handle the http request
         [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
-        public IActionResult Upsert(ProductVM obj, IFormFile file)
+        public IActionResult Upsert(ProductVM obj, IFormFile ?file)
         {
 
-            //server side validation because name cannot be empty
-            if (ModelState.IsValid)
-            {
 
-                //_unitOfWork.CoverType.Update(obj);   //
+            
+            if (ModelState.IsValid) 
+            {
+                //for creating firstproduct
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(wwwRootPath, @"images\products");
+                    var extention = Path.GetExtension(file.FileName);
+
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extention), FileMode.Create))
+                    {
+                        file.CopyTo(fileStreams);
+                    }
+                    obj.Product.ImageUrl = @"\images\products\" + fileName + extention;
+                }
+                _unitOfWork.Product.Add(obj.Product);   //
+                //for creating firstproduct
                 _unitOfWork.Save();        //    
-                TempData["success"] = "Covertype Updated Successfully";
+                TempData["success"] = "Product Created Successfully";
 
                 return RedirectToAction("Index");
             }
