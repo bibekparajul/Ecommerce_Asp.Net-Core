@@ -27,8 +27,7 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<CoverType> objCoverTypeList = _unitOfWork.CoverType.GetAll(); //   
-            return View(objCoverTypeList);
+            return View();
         }
         //GET
 
@@ -141,5 +140,20 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
 
         }
 
+        //apiendpoints data tables 
+
+        #region API CALLS
+        [HttpGet]
+
+        public IActionResult GetAll()
+        {
+            var productList = _unitOfWork.Product.GetAll();
+            return Json(new {data =  productList });
+        }
+
+
+        #endregion
     }
+
+
 }
