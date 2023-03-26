@@ -16,19 +16,19 @@
 
 
 <!-- this below table represent the how we are going to display the data in the table --> 
-<table class="table table-bordered table-striped" style="width:100%">
+<table id = "tblData" class="table table-bordered table-striped" style="width:100%">
     <thead>
         <tr>
             <th>Title</th>
             <th>ISBN</th>
             <th>Price</th>
-            <th>Author</th>
-            <th>Category</th>
+           <th>Author</th>
+            @*<th>Category</th>*@
 
             <!--Edit ko lagi-->
-            <th>
+@*            <th>
 
-            </th>
+            </th>*@
             <!---->
         </tr>
     </thead>
@@ -37,5 +37,9 @@
 
 </table>
 </div>
+
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}
 
 
