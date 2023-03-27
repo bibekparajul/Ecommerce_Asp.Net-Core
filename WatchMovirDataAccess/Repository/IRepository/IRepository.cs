@@ -10,10 +10,10 @@ namespace WacthMovie.DataAccess.Repository.IRepository
     public interface IRepository<T> where T : class
     {
         //T- Category(suppose )
-        T GetFirstorDefault(Expression<Func<T, bool>> filter); 
+        T GetFirstorDefault(Expression<Func<T, bool>> filter, string? includeProperties = null ); 
         //categorycontroller bata retrieve
-        IEnumerable<T> GetAll();
-
+        IEnumerable<T> GetAll(string? includeProperties = null);
+         
         void Add(T entity);
 
         //update ko lagi generic repo ma narakhney

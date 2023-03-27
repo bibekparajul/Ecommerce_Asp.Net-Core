@@ -147,11 +147,9 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
 
         public IActionResult GetAll()
         {
-            var productList = _unitOfWork.Product.GetAll();
+            var productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
             return Json(new {data =  productList });
         }
-
-
         #endregion
     }
 
