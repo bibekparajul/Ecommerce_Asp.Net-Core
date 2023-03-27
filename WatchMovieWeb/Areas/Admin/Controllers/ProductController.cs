@@ -63,11 +63,13 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
             }
             else
             {
+                productVM.Product = _unitOfWork.Product.GetFirstorDefault(u=>u.Id==id);
+                return View(productVM);
+
                 //update product
             }
 
 
-            return View(productVM);
         }
 
         //POST
