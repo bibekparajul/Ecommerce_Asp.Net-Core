@@ -132,13 +132,12 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
         [HttpGet]
 
         public IActionResult GetAll()
-        {
+        {   
             var productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
             return Json(new {data =  productList });
         }
         //delete
         [HttpDelete]                 //used to handle the http request
-        [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
         public IActionResult Delete(int? id)
         {
 
@@ -155,9 +154,6 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
             _unitOfWork.Product.Remove(obj);    //
             _unitOfWork.Save();         //
             return Json(new { success = true, message = "Successfully  deleted" });
-
-
-
 
         }
         #endregion
