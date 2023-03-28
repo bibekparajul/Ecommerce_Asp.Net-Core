@@ -125,43 +125,8 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
             return View(obj);
         }
 
-        //GET(for Delete) 
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var CoverTypeFromDbFirst = _unitOfWork.CoverType.GetFirstorDefault(u => u.Id == id);
-            if (CoverTypeFromDbFirst == null)
-            {
-                return NotFound();
-            }
-            return View(CoverTypeFromDbFirst);
-        }
 
-        //POST
-        [HttpPost]                 //used to handle the http request
-        [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
-        public IActionResult DeletePOSt(int? id)
-        {
-
-            var obj = _unitOfWork.CoverType.GetFirstorDefault(u => u.Id == id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            _unitOfWork.CoverType.Remove(obj);    //
-            _unitOfWork.Save();         //
-            TempData["success"] = "Covertype Deleted Successfully";
-
-            return RedirectToAction("Index");
-
-
-        }
-
-        //apiendpoints data tables 
+        //apiendpoints data tables (edit and delete ko lagi)
 
         #region API CALLS
         [HttpGet]
@@ -170,6 +135,30 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
         {
             var productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
             return Json(new {data =  productList });
+        }
+        //delete
+        [HttpDelete]                 //used to handle the http request
+        [ValidateAntiForgeryToken] //used to prevent the cross site request forgery attack
+        public IActionResult Delete(int? id)
+        {
+
+            var obj = _unitOfWork.Product.GetFirstorDefault(u => u.Id == id);
+            if (obj == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+            var oldImagePath = Path.Combine(_hostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+            _unitOfWork.Product.Remove(obj);    //
+            _unitOfWork.Save();         //
+            return Json(new { success = true, message = "Successfully  deleted" });
+
+
+
+
         }
         #endregion
     }
