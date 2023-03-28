@@ -2,8 +2,13 @@
 
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
-    <div class="border p-3 mt-4 row">
-        <div class="row pb-2">
+    <input asp-for="Product.Id" hidden />
+    <input asp-for="Product.ImageUrl" hidden />
+
+    <div class = "row">
+        <div class="col-10">
+                <div class="border p-3 mt-4 row">
+        <div class="col-12 pb-2">
             <h2 class="text-primary"> @(Model.Product.Id!=0?"Update":"Create") Product</h2>
         <hr />
         </div>
@@ -97,11 +102,19 @@
 
 
     </div>
+        </div>
+        <div class="col-2 pt-4">
+            <img src="@Model.Product.ImageUrl"
+            width = "100%" style="border-radius:5px; border:1px solid black" />
+        </div>
+    </div>
+
+
 </form>
 
 @section Scripts{
 @{
-   <partial name = "_ValidationScriptsPartial"></partial>
+           <partial name = "_ValidationScriptsPartial"></partial>
 }
 
 <script>

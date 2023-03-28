@@ -115,9 +115,7 @@ namespace WatchMovieWeb.Areas.Admin.Controllers
                     _unitOfWork.Product.Update(obj.Product);
 
 
-                }
-
-                _unitOfWork.Product.Add(obj.Product);   //
+                }   //
                 //for creating firstproduct
                 _unitOfWork.Save();        //    
                 TempData["success"] = "Product Created Successfully";
