@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using WacthMovie.DataAccess.Repository.IRepository;
 using WatchMovie.Models;
-using WatchMovie.Models.ViewModels;
 
 namespace WatchMovieWeb.Areas.Customer.Controllers
 {
