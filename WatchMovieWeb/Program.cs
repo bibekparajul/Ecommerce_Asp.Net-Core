@@ -43,6 +43,8 @@ app.UseRouting();
 app.UseAuthentication(); 
 app.UseAuthorization();
 
+app.MapRazorPages();       //for the register and login to work
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
