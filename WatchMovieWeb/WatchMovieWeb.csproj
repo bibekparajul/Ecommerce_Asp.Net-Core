@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WatchMovie.Models\WatchMovie.Models.csproj" />
+    <ProjectReference Include="..\WatchMovie.Utility\WatchMovie.Utility.csproj" />
     <ProjectReference Include="..\WatchMovirDataAccess\WacthMovie.DataAccess.csproj" />
   </ItemGroup>
 

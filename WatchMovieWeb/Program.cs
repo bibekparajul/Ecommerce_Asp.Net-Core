@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using WacthMovie.DataAccess.Repository;
 using WacthMovie.DataAccess.Repository.IRepository;
+using WatchMovie.Utility;
 using WatchMovieWeb.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,7 @@ builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProvide
 
 //unit of work in action 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();  //
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
  
 
 //this below code is used when we add the new razor runtime compilation package..which
