@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using WacthMovie.DataAccess.Repository.IRepository;
 using WatchMovie.Models;
 using WatchMovie.Utility;
 
@@ -34,6 +35,7 @@ namespace WatchMovieWeb.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IUnitOfWork _unitOfWork;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -41,8 +43,11 @@ namespace WatchMovieWeb.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IUnitOfWork unitOfWork
+            )
         {
+            _unitOfWork = unitOfWork;
             _roleManager = roleManager;
             _userManager = userManager;
             _userStore = userStore;
@@ -120,8 +125,13 @@ namespace WatchMovieWeb.Areas.Identity.Pages.Account
 
             public string? Role { get; set; }
 
+            public int? CompanyId { get; set; }
+
             [ValidateNever]
-            public IEnumerable<SelectListItem> RoleList { get; set; }
+            public IEnumerable<SelectListItem> RoleList { get; set; }     
+            
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompanyList { get; set; }
 
 
         }
@@ -146,7 +156,12 @@ namespace WatchMovieWeb.Areas.Identity.Pages.Account
                 {
                     Text = i,
                     Value = i
-                })
+                }),
+                CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
             };
         }
 

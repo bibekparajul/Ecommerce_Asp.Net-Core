@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WatchMovieWeb.DataAccess;
 
@@ -11,9 +12,10 @@ using WatchMovieWeb.DataAccess;
 namespace WatchMovieWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230411094042_addCompanyIdToUser")]
+    partial class addCompanyIdToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -358,9 +360,11 @@ namespace WatchMovieWeb.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CompanyId")
-                        .IsRequired()
+                    b.Property<int>("CompanuId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -372,7 +376,7 @@ namespace WatchMovieWeb.Migrations
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("CompanuId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -451,7 +455,7 @@ namespace WatchMovieWeb.Migrations
                 {
                     b.HasOne("WatchMovie.Models.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("CompanyId")
+                        .HasForeignKey("CompanuId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
