@@ -17,7 +17,19 @@ namespace WacthMovie.DataAccess.Repository
         public ShoppingCartRepository(ApplicationDbContext db): base(db)
         {
             _db = db;
-        }   
+        }
 
+        public int DecrementCount(ShoppingCart shoppingcart, int count)
+        {
+            shoppingcart.Count -= count ;
+            return shoppingcart.Count;
+            
+        }
+
+        public int IncrementCount(ShoppingCart shoppingcart, int count)
+        {
+            shoppingcart.Count += count;
+            return shoppingcart.Count;   
+        }
     }
 }

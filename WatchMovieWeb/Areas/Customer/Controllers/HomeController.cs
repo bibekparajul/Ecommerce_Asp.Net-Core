@@ -50,11 +50,20 @@ namespace WatchMovieWeb.Areas.Customer.Controllers
             //this claim helps to find out whether user is login or not
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            shoppingCart.ApplicationUserId = claim.Value; 
+            shoppingCart.ApplicationUserId = claim.Value;
 
+            ShoppingCart cartFromDB = _unitOfWork.ShoppingCart.GetFirstorDefault(
+              u=> u.ApplicationUserId == claim.Value && u.ProductId == shoppingCart.ProductId);
 
+            if(cartFromDB == null)
+            {
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+            }
+            else
+            {
+                _unitOfWork.ShoppingCart.IncrementCount(cartFromDB, shoppingCart.Count);
+            }
 
-            _unitOfWork.ShoppingCart.Add(shoppingCart);
             _unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
