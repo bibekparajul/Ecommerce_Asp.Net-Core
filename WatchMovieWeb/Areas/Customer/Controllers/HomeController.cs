@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Claims;
 using WacthMovie.DataAccess.Repository.IRepository;
 using WatchMovie.Models;
 
@@ -27,17 +29,40 @@ namespace WatchMovieWeb.Areas.Customer.Controllers
             return View(productList);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int productId)
         {
 
             ShoppingCart cartObj = new()
             {
                 Count = 1,
-                Product = _unitOfWork.Product.GetFirstorDefault(u => u.Id == id, includeProperties: "Category,CoverType")
+                ProductId = productId,
+                Product = _unitOfWork.Product.GetFirstorDefault(u => u.Id == productId, includeProperties: "Category,CoverType")
 
         };  
             return View(cartObj);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+            //this claim helps to find out whether user is login or not
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            shoppingCart.ApplicationUserId = claim.Value; 
+
+
+
+            _unitOfWork.ShoppingCart.Add(shoppingCart);
+            _unitOfWork.Save();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+
 
         public IActionResult Privacy()
         {
