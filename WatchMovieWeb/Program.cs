@@ -27,6 +27,13 @@ builder.Services.AddSingleton<IEmailSender, EmailSender>();
 //this below code is used when we add the new razor runtime compilation package..which
 //in this case is the  new nav bar from the solar themeee and nav inside the _layout.cshtml
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+}
+);
 
 
 var app = builder.Build();
