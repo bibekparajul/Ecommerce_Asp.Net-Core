@@ -12,8 +12,8 @@ namespace WacthMovie.DataAccess.Repository.IRepository
         //T- Category(suppose )
         T GetFirstorDefault(Expression<Func<T, bool>> filter, string? includeProperties = null ); 
         //categorycontroller bata retrieve
-        IEnumerable<T> GetAll(string? includeProperties = null);
-         
+        IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, string? includeProperties = null);
+         s
         void Add(T entity);
 
         //update ko lagi generic repo ma narakhney
