@@ -39,8 +39,7 @@ namespace WatchMovie.Models
         [Required]
         public string PhoneNumber { get; set; }
         
-        [Required]
-        public string StreetAddress { get; set; }
+
         
         [Required]
         public string City { get; set; }
