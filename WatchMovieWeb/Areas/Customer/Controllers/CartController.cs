@@ -73,7 +73,7 @@ namespace WatchMovieWeb.Areas.Customer.Controllers
                     cart.Product.Price50, cart.Product.Price100);
                 ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
-            return View();
+            return View(ShoppingCartVM);
         }
 
 
