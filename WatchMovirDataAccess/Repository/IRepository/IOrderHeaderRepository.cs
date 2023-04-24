@@ -16,7 +16,7 @@ namespace WacthMovie.DataAccess.Repository.IRepository
         void Update(OrderHeader obj);
 
         void UpdateStatus(int id, string orderStatus, string? paymentstatus = null);
-        void UpdateStripePaymentId(int id, string sessionId, string paymentIntentId );
+        void UpdateStripePaymentID(int id, string sessionId, string paymentIntentId);
 
         //save must be done in Repository ma but this is not the good practice 
     }

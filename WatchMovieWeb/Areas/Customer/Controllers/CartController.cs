@@ -129,7 +129,7 @@ namespace WatchMovieWeb.Areas.Customer.Controllers
             {
                 PaymentMethodTypes = new List<string>
                 {
-                    "cards",
+                    "card",
                 },
                 LineItems = new List<SessionLineItemOptions>(),
        
@@ -159,7 +159,7 @@ namespace WatchMovieWeb.Areas.Customer.Controllers
 
             var service = new SessionService();
             Session session = service.Create(options);
-            _unitOfWork.OrderHeader.UpdateStripePaymentId(ShoppingCartVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
+            _unitOfWork.OrderHeader.UpdateStripePaymentID(ShoppingCartVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
             _unitOfWork.Save();
 
             Response.Headers.Add("Location", session.Url);
